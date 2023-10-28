@@ -11,7 +11,6 @@ export function Homepage() {
             </div>
 
 
-            {post}
             
 
         </div>

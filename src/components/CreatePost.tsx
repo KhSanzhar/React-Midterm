@@ -1,36 +1,46 @@
-import React, { useState } from "react"
-import { Post } from "../models"
+import React, { useState } from 'react';
 
-
-interface CreatePostProps {
-    onCreate: (post: Post) => void
-}
-export function CreatePost({ onCreate }: CreatePostProps) {
-    const [title, setTitle] = useState('');
+const ImageForm = () => {
     const [description, setDescription] = useState('');
-    const [image, setImage] = useState('');
-    
-    return (
-        <form onSubmit={ submitHandler }>
-            <input 
-                type="text"
-                className="border py-2 px-4 mb-2 w-full outline-0"
-                placeholder="Enter title for post..."
-                value={title}
-                onChange={(event) => setTitle(event.target.value)}
-            />
-            <input 
-                type="text"
-                className="border py-2 px-4 mb-2 w-full outline-0"
-                placeholder="Enter description"
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
-            />
-            <input
-                type="text" 
-                
-            />
-        </form>
-    )
+    const [image, setImage] = useState(null);
+    const [preview, setPreview] = useState(null);
 
-}
+    const handleChange = (e) => {
+        if (e.target.name === 'image') {
+            setPreview(URL.createObjectURL(e.target.files[0]));
+        }
+        setImage(e.target.files[0]);
+        setDescription(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        setImage(null);
+        setPreview(null);
+        setDescription('');
+    };
+
+    return (
+        <div className="image-form">
+            <form onSubmit={handleSubmit}>
+                <input 
+                    type="text"
+                    className="border py-2 px-4 mb-2 w-full outline-0"
+                    placeholder="Enter description"
+                    value={description}
+                    onChange={(event) => setDescription(event.target.value)}
+                />
+                <input 
+                    type="file"
+                    name="image"
+                    onChange={handleChange}
+                />
+                {preview && <img src={preview} alt="preview" />}
+                <button type="submit">Add image</button>
+            </form>
+        </div>
+    );
+};
+
+export default ImageForm;
