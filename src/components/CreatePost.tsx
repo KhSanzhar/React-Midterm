@@ -5,7 +5,7 @@ const ImageForm = () => {
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState(null);
 
-    const handleChange = (e) => {
+    const handleChange = (e: any) => {
         if (e.target.name === 'image') {
             setPreview(URL.createObjectURL(e.target.files[0]));
         }
@@ -13,7 +13,7 @@ const ImageForm = () => {
         setDescription(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: any) => {
         e.preventDefault();
 
         setImage(null);

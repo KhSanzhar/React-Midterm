@@ -3,3 +3,11 @@ export interface Post {
     description: string
     image: string
 }
+
+export interface Profile {
+    Name: string
+    Picture: string
+    BirthDate: Date
+    email: string
+    password: string
+}
